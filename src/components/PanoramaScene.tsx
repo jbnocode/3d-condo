@@ -10,6 +10,8 @@ interface PanoramaSceneProps {
   cameraPhase: 'exterior' | 'flyIn' | 'interior';
   currentCheckpoint: string;
   onCheckpointChange: (checkpoint: string) => void;
+  onLoadStart?: () => void;
+  onLoadComplete?: () => void;
 }
 
 // Panorama sources - Using Poly Haven CC0 HDRIs converted to equirectangular JPG
@@ -76,20 +78,60 @@ function CondoTower({ selectedFloor }: { selectedFloor: number }) {
   );
 }
 
-// Panorama sphere component
+// Panorama sphere component with lazy loading
 function PanoramaSphere({ 
   panoramaUrl, 
-  opacity = 1 
+  opacity = 1,
+  onLoad,
 }: { 
   panoramaUrl: string; 
   opacity?: number;
+  onLoad?: () => void;
 }) {
-  const texture = useTexture(panoramaUrl);
-  
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  const [error, setError] = useState<boolean>(false);
+
   useEffect(() => {
-    texture.mapping = THREE.EquirectangularReflectionMapping;
-    texture.colorSpace = THREE.SRGBColorSpace;
-  }, [texture]);
+    const loader = new THREE.TextureLoader();
+    
+    loader.load(
+      panoramaUrl,
+      (loadedTexture) => {
+        loadedTexture.mapping = THREE.EquirectangularReflectionMapping;
+        loadedTexture.colorSpace = THREE.SRGBColorSpace;
+        setTexture(loadedTexture);
+        setError(false);
+        if (onLoad) onLoad();
+      },
+      undefined,
+      (err) => {
+        console.error('Error loading panorama:', panoramaUrl, err);
+        setError(true);
+        if (onLoad) onLoad(); // Still call onLoad to remove loading state
+      }
+    );
+
+    return () => {
+      if (texture) {
+        texture.dispose();
+      }
+    };
+  }, [panoramaUrl, onLoad]);
+
+  // Fallback for missing panoramas - gradient sphere
+  if (error || !texture) {
+    return (
+      <mesh scale={[-1, 1, 1]}>
+        <sphereGeometry args={[500, 60, 40]} />
+        <meshBasicMaterial
+          color={error ? '#4a5568' : '#2a2a3e'}
+          side={THREE.BackSide}
+          transparent={opacity < 1}
+          opacity={opacity}
+        />
+      </mesh>
+    );
+  }
 
   return (
     <mesh scale={[-1, 1, 1]}>
@@ -107,17 +149,25 @@ function PanoramaSphere({
 // Transition manager for smooth panorama crossfade
 function PanoramaTransition({ 
   currentCheckpoint, 
-  lightingMode 
+  lightingMode,
+  onLoadStart,
+  onLoadComplete,
 }: { 
   currentCheckpoint: string; 
   lightingMode: LightingMode;
+  onLoadStart?: () => void;
+  onLoadComplete?: () => void;
 }) {
   const [currentPano, setCurrentPano] = useState(currentCheckpoint);
   const [previousPano, setPreviousPano] = useState<string | null>(null);
   const [transitionProgress, setTransitionProgress] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (currentCheckpoint !== currentPano) {
+      setIsLoading(true);
+      if (onLoadStart) onLoadStart();
+      
       setPreviousPano(currentPano);
       setTransitionProgress(0);
       
@@ -134,12 +184,14 @@ function PanoramaTransition({
         } else {
           setCurrentPano(currentCheckpoint);
           setPreviousPano(null);
+          setIsLoading(false);
+          if (onLoadComplete) onLoadComplete();
         }
       };
       
       animate();
     }
-  }, [currentCheckpoint, currentPano]);
+  }, [currentCheckpoint, currentPano, onLoadStart, onLoadComplete]);
 
   const currentPanoramaUrl = PANORAMAS[currentPano]?.url || PANORAMAS.living.url;
   const previousPanoramaUrl = previousPano ? PANORAMAS[previousPano]?.url : null;
@@ -147,17 +199,25 @@ function PanoramaTransition({
   // Apply brightness adjustment for day/night
   const brightness = lightingMode === 'night' ? 0.3 : 1.0;
 
+  const handleLoad = () => {
+    if (isLoading) {
+      setIsLoading(false);
+      if (onLoadComplete) onLoadComplete();
+    }
+  };
+
   return (
     <group>
       {previousPanoramaUrl && transitionProgress < 1 && (
         <PanoramaSphere 
           panoramaUrl={previousPanoramaUrl} 
-          opacity={1 - transitionProgress} 
+          opacity={1 - transitionProgress}
         />
       )}
       <PanoramaSphere 
         panoramaUrl={currentPanoramaUrl} 
-        opacity={transitionProgress} 
+        opacity={transitionProgress}
+        onLoad={handleLoad}
       />
       
       {/* Overlay for day/night effect */}
@@ -181,6 +241,8 @@ export default function PanoramaScene({
   lightingMode,
   cameraPhase,
   currentCheckpoint,
+  onLoadStart,
+  onLoadComplete,
 }: PanoramaSceneProps) {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
   const controlsRef = useRef<any>(null);
@@ -246,6 +308,8 @@ export default function PanoramaScene({
         <PanoramaTransition 
           currentCheckpoint={currentCheckpoint}
           lightingMode={lightingMode}
+          onLoadStart={onLoadStart}
+          onLoadComplete={onLoadComplete}
         />
       )}
 

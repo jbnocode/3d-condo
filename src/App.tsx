@@ -5,6 +5,8 @@ import FloorSelector from './components/FloorSelector';
 import Controls from './components/Controls';
 import AgentBranding from './components/AgentBranding';
 import NavigationHotspots from './components/NavigationHotspots';
+import LoadingIndicator from './components/LoadingIndicator';
+import FloorPlanOverlay from './components/FloorPlanOverlay';
 import { AgentInfo, LightingMode, ViewMode } from './types';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
   const [showFloorSelector, setShowFloorSelector] = useState(true);
   const [cameraPhase, setCameraPhase] = useState<'exterior' | 'flyIn' | 'interior'>('exterior');
   const [currentCheckpoint, setCurrentCheckpoint] = useState<string>('living');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showFloorPlan, setShowFloorPlan] = useState(false);
 
   // Parse agent info from URL query params
   useEffect(() => {
@@ -45,6 +49,18 @@ function App() {
     setCurrentCheckpoint(checkpoint);
   };
 
+  const handleLoadStart = () => {
+    setIsLoading(true);
+  };
+
+  const handleLoadComplete = () => {
+    setIsLoading(false);
+  };
+
+  const handleToggleFloorPlan = () => {
+    setShowFloorPlan(!showFloorPlan);
+  };
+
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       <Canvas
@@ -57,8 +73,12 @@ function App() {
           cameraPhase={cameraPhase}
           currentCheckpoint={currentCheckpoint}
           onCheckpointChange={handleCheckpointChange}
+          onLoadStart={handleLoadStart}
+          onLoadComplete={handleLoadComplete}
         />
       </Canvas>
+
+      <LoadingIndicator isLoading={isLoading} />
 
       {showFloorSelector && (
         <FloorSelector
@@ -78,8 +98,20 @@ function App() {
             setLightingMode={setLightingMode}
             viewMode={viewMode}
             setViewMode={setViewMode}
+            onToggleFloorPlan={handleToggleFloorPlan}
           />
         </>
+      )}
+
+      {showFloorPlan && (
+        <FloorPlanOverlay
+          currentCheckpoint={currentCheckpoint}
+          onCheckpointChange={(checkpoint) => {
+            handleCheckpointChange(checkpoint);
+            setShowFloorPlan(false);
+          }}
+          onClose={() => setShowFloorPlan(false)}
+        />
       )}
 
       {agentInfo && <AgentBranding agentInfo={agentInfo} />}

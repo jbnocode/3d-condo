@@ -5,13 +5,13 @@ interface ControlsProps {
   setLightingMode: (mode: LightingMode) => void;
   viewMode: ViewMode;
   setViewMode: (mode: ViewMode) => void;
+  onToggleFloorPlan: () => void;
 }
 
 export default function Controls({
   lightingMode,
   setLightingMode,
-  viewMode,
-  setViewMode,
+  onToggleFloorPlan,
 }: ControlsProps) {
   return (
     <div
@@ -59,7 +59,7 @@ export default function Controls({
 
       {/* Floor Plan Toggle */}
       <button
-        onClick={() => setViewMode(viewMode === 'walkthrough' ? 'floorplan' : 'walkthrough')}
+        onClick={onToggleFloorPlan}
         style={{
           padding: '12px 20px',
           background: 'rgba(0, 0, 0, 0.7)',
@@ -84,9 +84,9 @@ export default function Controls({
         }}
       >
         <span style={{ fontSize: '18px' }}>
-          {viewMode === 'walkthrough' ? '🗺️' : '🚶'}
+          🗺️
         </span>
-        {viewMode === 'walkthrough' ? 'Floor Plan' : 'Walkthrough'}
+        Floor Plan
       </button>
     </div>
   );
