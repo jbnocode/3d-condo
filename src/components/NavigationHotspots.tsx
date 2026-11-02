@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 interface Hotspot {
   id: string;
   name: string;
@@ -14,14 +12,17 @@ const hotspots: Hotspot[] = [
   { id: 'balcony', name: 'Balcony', icon: '🌿' },
 ];
 
-export default function NavigationHotspots() {
-  const [activeHotspot, setActiveHotspot] = useState<string>('living');
+interface NavigationHotspotsProps {
+  currentCheckpoint: string;
+  onCheckpointChange: (checkpoint: string) => void;
+}
 
+export default function NavigationHotspots({
+  currentCheckpoint,
+  onCheckpointChange,
+}: NavigationHotspotsProps) {
   const handleHotspotClick = (id: string) => {
-    setActiveHotspot(id);
-    // In a real implementation, this would trigger camera animation
-    // For now, we'll just update the active state
-    console.log(`Navigating to: ${id}`);
+    onCheckpointChange(id);
   };
 
   return (
@@ -45,13 +46,13 @@ export default function NavigationHotspots() {
           onClick={() => handleHotspotClick(hotspot.id)}
           style={{
             padding: '12px 20px',
-            background: activeHotspot === hotspot.id
+            background: currentCheckpoint === hotspot.id
               ? 'rgba(255, 235, 59, 0.9)'
               : 'rgba(0, 0, 0, 0.7)',
             backdropFilter: 'blur(10px)',
-            border: `2px solid ${activeHotspot === hotspot.id ? '#ffeb3b' : 'rgba(255, 255, 255, 0.2)'}`,
+            border: `2px solid ${currentCheckpoint === hotspot.id ? '#ffeb3b' : 'rgba(255, 255, 255, 0.2)'}`,
             borderRadius: '24px',
-            color: activeHotspot === hotspot.id ? '#000' : 'white',
+            color: currentCheckpoint === hotspot.id ? '#000' : 'white',
             fontSize: '14px',
             fontWeight: '600',
             cursor: 'pointer',
@@ -63,13 +64,13 @@ export default function NavigationHotspots() {
             whiteSpace: 'nowrap',
           }}
           onMouseEnter={(e) => {
-            if (activeHotspot !== hotspot.id) {
+            if (currentCheckpoint !== hotspot.id) {
               e.currentTarget.style.background = 'rgba(0, 0, 0, 0.9)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }
           }}
           onMouseLeave={(e) => {
-            if (activeHotspot !== hotspot.id) {
+            if (currentCheckpoint !== hotspot.id) {
               e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
               e.currentTarget.style.transform = 'translateY(0)';
             }

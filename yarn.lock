@@ -321,6 +321,11 @@
   resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.67.4.tgz"
   integrity sha512-wL7MS4r0fYcxluF3ne2plofHZiB/LsqNCnyaUlyiKpAJLb6agPSFz7DEFCfkonWAZXMrLwCmC08b2ZEnEdJkog==
 
+"@rollup/rollup-linux-x64-musl@4.67.4":
+  version "4.67.4"
+  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.67.4.tgz"
+  integrity sha512-4H0XHfd2VufGjX7NjUyeue78sD0bRIoKSGjGqO+F5nSvL6jN48NAU7esdmtFEYxZXwObLtt3MJ/kHS0jASMW3g==
+
 "@theatre/core@*", "@theatre/core@^0.6.0":
   version "0.6.0"
   resolved "https://registry.npmjs.org/@theatre/core/-/core-0.6.0.tgz"

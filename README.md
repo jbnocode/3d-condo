@@ -4,21 +4,26 @@ An interactive 3D condominium visualization for Philippine real estate, featurin
 
 ## 🏗️ Built Upon Open Source
 
-This project adapts [Andrew Prifer's Camera Fly-Through Tutorial](https://github.com/andrewprifer/codropscameraflythroughtutorial) (MIT License), which demonstrates scroll-based camera animation using Theatre.js and React Three Fiber.
+This project adapts [Andrew Prifer's Camera Fly-Through Tutorial](https://github.com/andrewprifer/codropscameraflythroughtutorial) (MIT License) as a foundation, then adds Matterport-style 360° panorama viewing.
 
-**Upstream credit:**
-- Original tutorial: Copyright (c) 2009 - 2022 [Codrops](https://tympanus.net/codrops)
-- Camera fly-through technique by Andrew Prifer
-- MIT License (see LICENSE file)
+**Credits:**
+- **Base project**: Andrew Prifer / Codrops (MIT License)
+- **Panoramas**: [Poly Haven](https://polyhaven.com/) (CC0 - Public Domain)
+  - Lythwood Room, Lythwood Lounge by Greg Zaal
+  - Modern Bathroom by Adrian Kubasa
+  - Anniversary Lounge, Cayley Interior by Greg Zaal
+- **License**: MIT for code, CC0 for panoramas (see LICENSE file)
 
 ## ✨ Features
 
-- 🏢 **Exterior tower view** with floor selection UI
-- 🎬 **Cinematic fly-in** from exterior into selected unit (inspired by architectural visualization)
-- 📍 **Checkpoint navigation** - Smooth camera transitions between Living Room, Bedroom, Bath, Kitchen, and Balcony
-- 🗺️ **Floor plan toggle** - Switch to top-down 2D view
-- 🌓 **Day/night lighting** - Toggle between daytime and nighttime ambiance
-- 📱 **Mobile-friendly** - Touch controls and responsive layout
+### 🎬 Matterport-Style Experience
+- 🏢 **Exterior tower view** with 30-floor selection UI
+- 🎬 **Cinematic fly-in** from exterior into selected unit
+- 🌐 **360° panorama rooms** - Photorealistic equirectangular panoramas (free CC0 from Poly Haven)
+- 🖱️ **Mouse drag to look around** - OrbitControls for intuitive navigation
+- 📍 **Hotspot teleportation** - Click to jump between rooms with smooth crossfade transitions
+- 🌓 **Day/night mode** - Toggle lighting ambiance
+- 📱 **Mobile-friendly** - Touch drag navigation, responsive layout
 - 🏷️ **Agent branding** - Customizable via URL query params (`?agent=Name&phone=09171234567`)
 - ⚠️ **Disclaimer** - "Artist's rendition · for illustration only"
 
@@ -50,13 +55,25 @@ Add query parameters to the URL:
 http://localhost:5173?agent=Juan+dela+Cruz&phone=09171234567
 ```
 
-### Modifying Checkpoints
-Edit `src/components/CondoScene.tsx` and update the checkpoint positions in the Theatre.js sequence.
+### Using Custom Panoramas
+1. Shoot 360° photos with a 360° camera (Ricoh Theta, Insta360, etc.)
+2. Export as equirectangular projection (2:1 aspect ratio)
+3. Resize to 2048x1024 (2K) or 4096x2048 (4K)
+4. Save as JPG (quality 80-90)
+5. Place in `public/panoramas/` with names:
+   - `living-room.jpg`
+   - `bedroom.jpg`
+   - `bathroom.jpg`
+   - `kitchen.jpg`
+   - `balcony.jpg`
 
-### Replacing the 3D Model
-1. Export your GLTF/GLB model from Blender or other 3D software
-2. Place it in the `public/` folder
-3. Update the path in `src/components/CondoScene.tsx`
+Or download free CC0 panoramas from Poly Haven:
+```bash
+./scripts/download-panoramas.sh
+# Then convert HDR to JPG
+```
+
+See `PANORAMA_UPGRADE.md` for detailed instructions.
 
 ## 📁 Project Structure
 
