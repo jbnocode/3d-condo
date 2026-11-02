@@ -1,9 +1,8 @@
 {
-  "name": "3d-condo-walkthrough",
+  "name": "3d-condo",
   "private": true,
-  "version": "0.1.0",
-  "type": "module",
-  "description": "Interactive 3D condo walkthrough for Philippine real estate",
+  "version": "2.0.0",
+  "description": "Branded 360° condo walkthrough for Philippine sales agents",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,34 +10,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^7.0.1",
-    "@react-three/drei": "^9.105.4",
-    "@react-three/fiber": "^8.16.1",
-    "@tailwindcss/typography": "^0.5.20",
-    "@theatre/core": "^0.6.0",
-    "@theatre/r3f": "^0.6.0",
-    "@theatre/studio": "^0.6.0",
-    "@types/node": "^26.6.6",
-    "autoprefixer": "^10.6.2",
-    "framer-motion": "^14.9.0",
-    "html2canvas": "^1.4.1",
-    "jspdf": "^4.2.1",
-    "lucide-react": "^1.66.0",
-    "next": "^14.2.35",
-    "postcss": "^8.5.32",
+    "@react-three/drei": "^9.117.3",
+    "@react-three/fiber": "^8.17.10",
+    "lucide-react": "^0.468.0",
+    "next": "^14.2.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.91.0",
-    "tailwindcss": "^4.3.3",
-    "three": "^0.162.0",
-    "zod": "^4.6.7"
+    "three": "^0.170.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
-    "@types/three": "^0.162.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "typescript": "^5.9.3",
-    "vite": "^5.1.6"
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@types/three": "^0.170.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.21",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
   }
 }

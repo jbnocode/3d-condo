@@ -1,110 +1,54 @@
 import Link from 'next/link';
-import { ArrowRight, Smartphone, LineChart, QrCode, FileSpreadsheet } from 'lucide-react';
+import BrandMark from '@/components/BrandMark';
+import ShareLinkBuilder from '@/components/ShareLinkBuilder';
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Logo/Brand */}
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-            Plott
-          </h1>
-          
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl text-gray-600 mb-8">
-            Transform your property listings into interactive 3D experiences
-          </p>
+    <main className="relative min-h-screen overflow-hidden bg-ink-950">
+      <img
+        src="/photos/dining.jpg"
+        alt=""
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-35"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/85 to-ink-950/40" />
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link
-              href="/view/demo-unit-1"
-              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg transition-all hover:scale-105 flex items-center justify-center gap-2"
-            >
-              View Demo 3D Tour
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <button className="px-8 py-4 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-xl shadow-lg border-2 border-gray-200 transition-all">
-              Start Free Trial
-            </button>
-          </div>
+      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col px-5 py-8 md:px-8">
+        <header className="flex items-center justify-between">
+          <BrandMark className="text-lg text-cream" />
+          <Link
+            href="/view/demo?agent=Maria%20Santos&phone=09171234567"
+            className="text-sm font-semibold text-gold hover:underline"
+          >
+            Open sample tour
+          </Link>
+        </header>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-            <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                <Smartphone className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">3D Virtual Tours</h3>
-              <p className="text-sm text-gray-600">
-                Interactive walkthroughs with checkpoint navigation
-              </p>
-            </div>
-
-            <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                <LineChart className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Lead Tracking CRM</h3>
-              <p className="text-sm text-gray-600">
-                Track engagement, time spent, and client activity
-              </p>
-            </div>
-
-            <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                <QrCode className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">QR Codes & Links</h3>
-              <p className="text-sm text-gray-600">
-                Shareable links for social media and print materials
-              </p>
-            </div>
-
-            <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                <FileSpreadsheet className="w-6 h-6 text-orange-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Auto Computation</h3>
-              <p className="text-sm text-gray-600">
-                Generate payment estimates and capture qualified leads
-              </p>
-            </div>
-          </div>
-
-          {/* Pricing Preview */}
-          <div className="mt-16 p-8 bg-white rounded-3xl shadow-xl">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Simple, Transparent Pricing
-            </h2>
-            <div className="flex items-baseline justify-center gap-2 mb-4">
-              <span className="text-5xl font-bold text-blue-600">₱1,499</span>
-              <span className="text-xl text-gray-600">/month</span>
-            </div>
-            <p className="text-gray-600 mb-6">
-              Pro Plan: 3 active units • Unlimited shares • Full CRM • QR codes • Analytics
+        <div className="mt-16 grid flex-1 items-center gap-12 md:mt-24 md:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
+              Sales agent tool
             </p>
-            <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">
-              Start 7-Day Free Trial
-            </button>
-          </div>
-
-          {/* Footer */}
-          <div className="mt-16 text-sm text-gray-500">
-            <p>Made for Philippine real estate agents 🇵🇭</p>
-            <p className="mt-2">
-              <Link href="/privacy-policy" className="hover:text-blue-600 underline">
-                Privacy Policy
-              </Link>
-              {' • '}
-              <Link href="/scanning" className="hover:text-blue-600 underline">
-                3D Scanning Service
-              </Link>
+            <h1 className="mt-3 max-w-xl text-4xl font-extrabold leading-tight text-cream md:text-5xl">
+              Send a branded 360° walkthrough — not a listing page.
+            </h1>
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-white/70">
+              Your client gets a Matterport-style tour of the unit, with your photo, name, and
+              Call / Viber / Messenger on every screen. No marketplace chrome. No “request a
+              tour” funnel.
             </p>
+            <ul className="mt-6 space-y-2 text-sm text-white/75">
+              <li>— Floor hotspots hop between rooms</li>
+              <li>— Floor plan pins jump the camera</li>
+              <li>— Share <code className="text-gold">/view/demo?agent=&amp;phone=</code></li>
+            </ul>
           </div>
+          <ShareLinkBuilder />
         </div>
+
+        <p className="relative mt-10 text-[11px] text-white/40">
+          Demo pans are an artist&apos;s rendition of Conde de la Vega 304 (private demo). Credit
+          is on the tour footer. Swap files via docs/PANORAMA_SWAP.md.
+        </p>
       </div>
     </main>
   );
