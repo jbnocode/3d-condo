@@ -1,0 +1,146 @@
+{
+  "sheetsById": {
+    "Scene": {
+      "staticOverrides": {
+        "byObject": {
+          "Camera": {
+            "position": {
+              "x": 0,
+              "y": 1.6,
+              "z": 8
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 10,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Camera": {
+            "trackData": {
+              "position.x": {
+                "keyframes": [
+                  {
+                    "id": "0",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 0
+                  },
+                  {
+                    "id": "1",
+                    "position": 2,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": -5
+                  },
+                  {
+                    "id": "2",
+                    "position": 4,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 5
+                  },
+                  {
+                    "id": "3",
+                    "position": 6,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": -7
+                  },
+                  {
+                    "id": "4",
+                    "position": 8,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 5
+                  },
+                  {
+                    "id": "5",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 0
+                  }
+                ],
+                "type": "BasicKeyframedTrack"
+              },
+              "position.y": {
+                "keyframes": [
+                  {
+                    "id": "0",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 1.6
+                  }
+                ],
+                "type": "BasicKeyframedTrack"
+              },
+              "position.z": {
+                "keyframes": [
+                  {
+                    "id": "0",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 8
+                  },
+                  {
+                    "id": "1",
+                    "position": 2,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": -5
+                  },
+                  {
+                    "id": "2",
+                    "position": 4,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 5
+                  },
+                  {
+                    "id": "3",
+                    "position": 6,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 7
+                  },
+                  {
+                    "id": "4",
+                    "position": 8,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": 5
+                  },
+                  {
+                    "id": "5",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "value": -8
+                  }
+                ],
+                "type": "BasicKeyframedTrack"
+              }
+            },
+            "trackIdByPropPath": {
+              "['position', 'x']": "position.x",
+              "['position', 'y']": "position.y",
+              "['position', 'z']": "position.z"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": []
+}
