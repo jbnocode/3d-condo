@@ -22,6 +22,8 @@ This project adapts [Andrew Prifer's Camera Fly-Through Tutorial](https://github
 - 🌐 **360° panorama rooms** - Photorealistic equirectangular panoramas (free CC0 from Poly Haven)
 - 🖱️ **Mouse drag to look around** - OrbitControls for intuitive navigation
 - 📍 **Hotspot teleportation** - Click to jump between rooms with smooth crossfade transitions
+- 🗺️ **Interactive floor plan** - SVG overlay with room layout, current location marker, and click-to-navigate
+- ⏳ **Loading indicators** - Visual feedback during panorama transitions
 - 🌓 **Day/night mode** - Toggle lighting ambiance
 - 📱 **Mobile-friendly** - Touch drag navigation, responsive layout
 - 🏷️ **Agent branding** - Customizable via URL query params (`?agent=Name&phone=09171234567`)
