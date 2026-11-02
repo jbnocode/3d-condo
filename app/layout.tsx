@@ -1,35 +1,32 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata, Viewport } from 'next';
+import { Manrope } from 'next/font/google';
+import './globals.css';
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: "Plott - Interactive 3D Property Tours",
-  description: "Transform your property listings into interactive 3D experiences. Close more deals with virtual tours, lead tracking, and data-driven insights.",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
-  themeColor: "#3B82F6",
-  icons: {
-    icon: "/favicon.ico",
-  },
+  title: 'ShowUnit — Branded 360° walkthroughs for agents',
+  description:
+    'Philippine condo sales agents share a branded client link for a 360° Matterport-style walkthrough of a unit.',
+  icons: { icon: '/favicon.ico' },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.Node;
-}>) {
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#0c0d10',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-      </head>
-      <body className="antialiased">
-        {children}
-      </body>
+      <body className={`${manrope.className} antialiased`}>{children}</body>
     </html>
   );
 }
